@@ -3,7 +3,7 @@
     "path": "~/Desktop/analisis_CA/dashboard_femenil/Dockerfile",
     "project_path": "Dockerfile",
     "type": "dockerfile",
-    "hash": "1223151148",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1756410880469.0,
@@ -12,8 +12,8 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "26,14",
-        "scrollLine": "6"
+        "cursorPosition": "0,26",
+        "scrollLine": "0"
     },
     "folds": "",
     "lastKnownWriteTime": 1756410910,
