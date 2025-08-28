@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     libgdal-dev \
     libgeos-dev \
     libproj-dev \
+    gfortran \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
