@@ -1,6 +1,5 @@
 # Dockerfile for dashboard_femenil
-
-# Use stable R version compatible with renv.lock
+# Base image
 FROM rocker/shiny:4.4.1
 
 # Install system dependencies commonly needed by R packages
@@ -21,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     libproj-dev \
     gfortran \
     g++ \
+    default-jdk \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
@@ -34,9 +34,14 @@ COPY micros micros
 COPY www www
 COPY rsconnect rsconnect
 
-# Install renv and restore project library with verbose output
-RUN R -e "install.packages('renv', repos='https://cloud.r-project.org')" && \
-    R -e "options(renv.verbose = TRUE); renv::restore(prompt = FALSE)"
+# Install renv
+RUN R -e "install.packages('renv', repos='https://cloud.r-project.org')"
 
-# Default command to deploy app
+# Pre-install heavy or compilation-heavy packages to avoid failures
+RUN R -e "install.packages(c('sf', 'V8', 'units'), repos='https://cloud.r-project.org')"
+
+# Restore project library with verbose output and binary packages
+RUN R -e "options(renv.verbose=TRUE); renv::restore(prompt=FALSE, type='binary')"
+
+# Default command to deploy the app
 CMD ["Rscript", "deploy.R"]
