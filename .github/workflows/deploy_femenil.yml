@@ -54,8 +54,7 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "chore: update femenil data sheet [skip ci]"
-            git pull origin main --rebase
-            git push origin main
+            git push --force origin main
           fi
 
       # 6) Build Docker image
