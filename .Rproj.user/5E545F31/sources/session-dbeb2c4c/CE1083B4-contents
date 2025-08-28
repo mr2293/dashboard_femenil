@@ -1,8 +1,13 @@
 # Dockerfile for dashboard_femenil
-# Base image
+
+# ---------------------------
+# 1. Base image
+# ---------------------------
 FROM rocker/shiny:4.4.1
 
-# Install system dependencies commonly needed by R packages
+# ---------------------------
+# 2. Install system dependencies commonly needed by R packages
+# ---------------------------
 RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
@@ -23,10 +28,14 @@ RUN apt-get update && apt-get install -y \
     default-jdk \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
+# ---------------------------
+# 3. Set working directory
+# ---------------------------
 WORKDIR /home/dashboard_femenil
 
-# Copy project files
+# ---------------------------
+# 4. Copy project files
+# ---------------------------
 COPY dashboard_femenil.Rproj renv.lock ./
 COPY app.R dashboard_femenil.R deploy.R ./
 COPY data data
@@ -34,14 +43,22 @@ COPY micros micros
 COPY www www
 COPY rsconnect rsconnect
 
-# Install renv
+# ---------------------------
+# 5. Install renv
+# ---------------------------
 RUN R -e "install.packages('renv', repos='https://cloud.r-project.org')"
 
-# Pre-install heavy or compilation-heavy packages to avoid failures
-RUN R -e "install.packages(c('sf', 'V8', 'units'), repos='https://cloud.r-project.org')"
+# ---------------------------
+# 6. Pre-install heavy or compilation-heavy packages
+# ---------------------------
+RUN R -e "install.packages(c('sf', 'V8', 'units'), repos='https://cloud.r-project.org', type='binary')"
 
-# Restore project library with verbose output and binary packages
+# ---------------------------
+# 7. Restore project library using renv with binary packages
+# ---------------------------
 RUN R -e "options(renv.verbose=TRUE); renv::restore(prompt=FALSE, type='binary')"
 
-# Default command to deploy the app
+# ---------------------------
+# 8. Default command to deploy the app
+# ---------------------------
 CMD ["Rscript", "deploy.R"]
