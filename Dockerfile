@@ -1,7 +1,7 @@
 # Dockerfile for dashboard_femenil
 
 # Use a newer R version compatible with renv.lock
-FROM rocker/shiny:4.5.2
+FROM rocker/shiny:4.4.1
 
 # Install system dependencies commonly needed by R packages
 RUN apt-get update && apt-get install -y \
