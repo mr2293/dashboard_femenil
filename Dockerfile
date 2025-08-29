@@ -26,6 +26,9 @@ RUN apt-get update && apt-get install -y \
     gfortran \
     g++ \
     default-jdk \
+    pkg-config \
+    libharfbuzz-dev \
+    libfribidi-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # ---------------------------
