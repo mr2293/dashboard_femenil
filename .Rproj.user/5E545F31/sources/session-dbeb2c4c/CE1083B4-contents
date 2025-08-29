@@ -2,14 +2,9 @@
 # Dockerfile for dashboard_femenil
 # ---------------------------
 
-# ---------------------------
-# 1. Base image
-# ---------------------------
 FROM rocker/shiny:4.4.1
 
-# ---------------------------
-# 2. Install system dependencies including textshaping/build requirements
-# ---------------------------
+# Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     pkg-config \
@@ -36,19 +31,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgit2-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# ---------------------------
-# 3. Configure Java for R
-# ---------------------------
-RUN R CMD javareconf
+# Ensure pkg-config can find harfbuzz & fribidi
+ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 
-# ---------------------------
-# 4. Set working directory
-# ---------------------------
+# Set working directory
 WORKDIR /home/dashboard_femenil
 
-# ---------------------------
-# 5. Copy project files
-# ---------------------------
+# Copy project files
 COPY dashboard_femenil.Rproj renv.lock ./
 COPY app.R dashboard_femenil.R deploy.R ./
 COPY data data
@@ -56,22 +45,14 @@ COPY micros micros
 COPY www www
 COPY rsconnect rsconnect
 
-# ---------------------------
-# 6. Install renv first
-# ---------------------------
+# Install renv first
 RUN R -e "install.packages('renv', repos='https://cloud.r-project.org')"
 
-# ---------------------------
-# 7. Pre-install packages that compile (optional, speeds up renv restore)
-# ---------------------------
+# Optional: pre-install packages that require compilation
 RUN R -e "install.packages(c('sf', 'units', 'V8', 'ragg'), repos='https://cloud.r-project.org')"
 
-# ---------------------------
-# 8. Restore project library using renv
-# ---------------------------
+# Restore project library with renv
 RUN R -e "options(renv.verbose=TRUE); renv::restore(prompt=FALSE)"
 
-# ---------------------------
-# 9. Default command to deploy the app
-# ---------------------------
+# Default command
 CMD ["Rscript", "deploy.R"]
