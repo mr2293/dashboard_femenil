@@ -29,12 +29,17 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # ---------------------------
-# 3. Set working directory
+# 3. Configure Java for R
+# ---------------------------
+RUN R CMD javareconf
+
+# ---------------------------
+# 4. Set working directory
 # ---------------------------
 WORKDIR /home/dashboard_femenil
 
 # ---------------------------
-# 4. Copy project files
+# 5. Copy project files
 # ---------------------------
 COPY dashboard_femenil.Rproj renv.lock ./
 COPY app.R dashboard_femenil.R deploy.R ./
@@ -44,21 +49,21 @@ COPY www www
 COPY rsconnect rsconnect
 
 # ---------------------------
-# 5. Install renv
+# 6. Install renv
 # ---------------------------
 RUN R -e "install.packages('renv', repos='https://cloud.r-project.org')"
 
 # ---------------------------
-# 6. Pre-install heavy or compilation-heavy packages
+# 7. Pre-install heavy or compilation-heavy packages
 # ---------------------------
-RUN R -e "install.packages(c('sf', 'V8', 'units'), repos='https://cloud.r-project.org', type='binary')"
+RUN R -e "install.packages(c('sf', 'V8', 'units'), repos='https://cloud.r-project.org')"
 
 # ---------------------------
-# 7. Restore project library using renv with binary packages
+# 8. Restore project library using renv
 # ---------------------------
-RUN R -e "options(renv.verbose=TRUE); renv::restore(prompt=FALSE, type='binary')"
+RUN R -e "options(renv.verbose=TRUE); renv::restore(prompt=FALSE)"
 
 # ---------------------------
-# 8. Default command to deploy the app
+# 9. Default command to deploy the app
 # ---------------------------
 CMD ["Rscript", "deploy.R"]

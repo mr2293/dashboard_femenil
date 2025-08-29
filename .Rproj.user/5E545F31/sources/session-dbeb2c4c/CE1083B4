@@ -3,7 +3,7 @@
     "path": "~/Desktop/analisis_CA/dashboard_femenil/Dockerfile",
     "project_path": "Dockerfile",
     "type": "dockerfile",
-    "hash": "0",
+    "hash": "791200234",
     "contents": "",
     "dirty": false,
     "created": 1756410880469.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "64,0",
-        "scrollLine": "34"
+        "cursorPosition": "69,0",
+        "scrollLine": "39"
     },
     "folds": "",
-    "lastKnownWriteTime": 1756424426,
+    "lastKnownWriteTime": 1756493242,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1756424426609,
+    "last_content_update": 1756493242818,
     "read_only": false,
     "read_only_alternatives": []
 }
