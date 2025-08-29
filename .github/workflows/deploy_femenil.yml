@@ -72,4 +72,5 @@ jobs:
             -e SHINY_ACC_NAME="${SHINY_ACC_NAME}" \
             -e TOKEN="${TOKEN}" \
             -e SECRET="${SECRET}" \
-            dashboard_femenil
+            dashboard_femenil R -e "rsconnect::setAccountInfo(name=Sys.getenv('SHINY_ACC_NAME'), token=Sys.getenv('TOKEN'), secret=Sys.getenv('SECRET')); rsconnect::deployApp(appDir='.', launch.browser=FALSE)"
+
