@@ -1,17 +1,18 @@
-# ---------------------------
+# ===============================
 # Dockerfile for dashboard_femenil
-# ---------------------------
-
+# ===============================
 FROM rocker/shiny:4.4.1
 
-# Install system dependencies
+# ------------------------------
+# 1. Install system dependencies
+# ------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     pkg-config \
-    libcairo2-dev \
-    libfreetype6-dev \
     libharfbuzz-dev \
     libfribidi-dev \
+    libcairo2-dev \
+    libfreetype6-dev \
     libglib2.0-dev \
     libpng-dev \
     libjpeg-dev \
@@ -31,13 +32,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgit2-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Ensure pkg-config can find harfbuzz & fribidi
-ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+# ------------------------------
+# 2. Set environment variables
+# ------------------------------
+# Fix pkg-config path so R packages like textshaping can find harfbuzz & fribidi
+ENV PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
 
-# Set working directory
+# ------------------------------
+# 3. Set working directory
+# ------------------------------
 WORKDIR /home/dashboard_femenil
 
-# Copy project files
+# ------------------------------
+# 4. Copy project files
+# ------------------------------
 COPY dashboard_femenil.Rproj renv.lock ./
 COPY app.R dashboard_femenil.R deploy.R ./
 COPY data data
@@ -45,14 +53,22 @@ COPY micros micros
 COPY www www
 COPY rsconnect rsconnect
 
-# Install renv first
+# ------------------------------
+# 5. Install renv
+# ------------------------------
 RUN R -e "install.packages('renv', repos='https://cloud.r-project.org')"
 
-# Optional: pre-install packages that require compilation
-RUN R -e "install.packages(c('sf', 'units', 'V8', 'ragg'), repos='https://cloud.r-project.org')"
-
-# Restore project library with renv
+# ------------------------------
+# 6. Restore renv environment
+# ------------------------------
 RUN R -e "options(renv.verbose=TRUE); renv::restore(prompt=FALSE)"
 
-# Default command
-CMD ["Rscript", "deploy.R"]
+# ------------------------------
+# 7. Expose Shiny port
+# ------------------------------
+EXPOSE 3838
+
+# ------------------------------
+# 8. Launch Shiny app
+# ------------------------------
+CMD ["R", "-e", "shiny::runApp('.', host='0.0.0.0', port=3838)"]
