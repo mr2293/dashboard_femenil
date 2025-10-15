@@ -2,8 +2,8 @@ name: Update Google Sheet & Deploy Femenil Shiny App
 
 on:
   schedule:
-    # Run daily at 9:45 AM Mexico City time
-    - cron: '45 15 * * *'
+    # Run daily at 10:30 AM Mexico City time
+    - cron: '30 16 * * *'
   workflow_dispatch:
 
 permissions:
