@@ -175,6 +175,7 @@ server <- function(input, output, session) {
   # 1) ACWR x RECOVERY
   output$acwr_scatter <- renderPlotly({
     req(selected())
+    
     df <- scatter_df |>
       dplyr::mutate(
         selected_flag = player == selected(),
@@ -184,18 +185,31 @@ server <- function(input, output, session) {
           "<br>Score de Recuperación: ", recovery_score,
           "<br>Índice de Carga: ", round(ac_ratio, 2),
           "<br>Estatus de Recuperación: ", recovery_status,
-          "<br>Estatus de Carga: ", load_status
+          "<br>Estatus de Carga: ", load_status,
+          ifelse(pain_flag, paste0("<br>Zona Adolorida: ", zona_adolorida), "")
         )
       )
     
+    # one ring per player with pain_flag == TRUE
+    rings_df <- df |>
+      dplyr::filter(pain_flag) |>
+      dplyr::distinct(player, .keep_all = TRUE)
+    
     p <- ggplot(df, aes(x = recovery_score, y = ac_ratio)) +
       geom_hline(yintercept = c(0.8, 1.3), linetype = "dashed", color = "gray50") +
+      # base points
       geom_point(aes(fill = color_status, text = hover_text, customdata = player),
-                 size = 6, alpha = 0.3, color = "black") +
+                 size = 6, alpha = 0.3, color = "black", shape = 21) +
+      # selected highlight
       geom_point(data = df |> dplyr::filter(selected_flag),
                  aes(fill = color_status, text = hover_text, customdata = player),
                  size = 8, shape = 21, stroke = 2, color = "black") +
-      scale_fill_manual(values = c("green" = "#2ca02c", "yellow" = "#ffbf00", "red" = "#d62728")) +
+      # RED RINGS for pain_flag
+      geom_point(data = rings_df,
+                 aes(x = recovery_score, y = ac_ratio),
+                 inherit.aes = FALSE,
+                 shape = 21, size = 9, stroke = 1, fill = NA, color = "#d62728") +
+      scale_fill_manual(values = c(green = "#2ca02c", yellow = "#ffbf00", red = "#d62728")) +
       labs(x = "Score de Recuperación", y = "Índice de Carga (ACWR)",
            title = "ACWR & Recuperación: Resumen del equipo de hoy") +
       theme_minimal(base_size = 14) +
@@ -280,9 +294,11 @@ server <- function(input, output, session) {
     ggplotly(p3, tooltip = "text", source = "acwr_rest_scatter")
   })
   
-  # 4) ACWR x PAIN (NEW)
+  # 4) ACWR x PAIN 
   output$acwr_pain_scatter <- renderPlotly({
     req(selected())
+    
+    # scatter data must already include: pain_flag, zona_adolorida
     df <- pain_scatter_df |>
       dplyr::mutate(
         selected_flag = player == selected(),
@@ -292,26 +308,47 @@ server <- function(input, output, session) {
           "<br>Score de Dolor Muscular: ", pain_score,
           "<br>Índice de Carga: ", round(ac_ratio, 2),
           "<br>Estatus de Dolor Muscular: ", pain_status,
-          "<br>Estatus de Carga: ", load_status
+          "<br>Estatus de Carga: ", load_status,
+          ifelse(pain_flag, paste0("<br>Zona Adolorida: ", zona_adolorida), "")
         )
       )
     
+    # one red ring per flagged player (avoid duplicates)
+    rings_df <- df |>
+      dplyr::filter(pain_flag) |>
+      dplyr::distinct(player, .keep_all = TRUE)
+    
     p4 <- ggplot(df, aes(x = pain_score, y = ac_ratio)) +
       geom_hline(yintercept = c(0.8, 1.3), linetype = "dashed", color = "gray50") +
-      geom_point(aes(fill = color_status_pain, text = hover_text, customdata = player),
-                 size = 6, alpha = 0.3, color = "black") +
-      geom_point(data = df |> dplyr::filter(selected_flag),
-                 aes(fill = color_status_pain, text = hover_text, customdata = player),
-                 size = 8, shape = 21, stroke = 2, color = "black") +
+      # base points
+      geom_point(
+        aes(fill = color_status_pain, text = hover_text, customdata = player),
+        shape = 21, size = 6, alpha = 0.3, color = "black", stroke = 0.7
+      ) +
+      # selected highlight
+      geom_point(
+        data = df |> dplyr::filter(selected_flag),
+        aes(fill = color_status_pain, text = hover_text, customdata = player),
+        shape = 21, size = 8, stroke = 2, color = "black"
+      ) +
+      # red rings for 3-day pain flag
+      geom_point(
+        data = rings_df,
+        aes(x = pain_score, y = ac_ratio),
+        inherit.aes = FALSE,
+        shape = 21, size = 9, stroke = 1, fill = NA, color = "#d62728"
+      ) +
       scale_fill_manual(values = c("green"="#2ca02c","yellow"="#ffbf00","red"="#d62728")) +
       labs(x = "Score de Dolor Muscular", y = "Índice de Carga (ACWR)",
            title = "ACWR & Dolor Muscular: Resumen del equipo de hoy") +
       theme_minimal(base_size = 14) +
-      theme(legend.position="none",
-            plot.title = element_text(hjust=0.5, face="bold", size=20),
-            panel.grid.minor = element_blank(),
-            panel.grid.major.x = element_blank(),
-            panel.grid.major.y = element_blank())
+      theme(
+        legend.position = "none",
+        plot.title = element_text(hjust = 0.5, face = "bold", size = 20),
+        panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_blank()
+      )
     
     ggplotly(p4, tooltip = "text", source = "acwr_pain_scatter")
   })
