@@ -237,8 +237,6 @@ micros_shiny_comb_fem <- micros_shiny_comb_fem |>
   mutate(player = case_when(
     player == "Itzel Velasco" ~ "Itzel Velasco",
     player == "Sandra Paños" ~ "Sandra Paños",
-    player == "Nicolette Hernandez" ~ "Nicolette Hernández",
-    player == "Annie Karich" ~ "Annie Karich",
     player == "Irene Guerrero" ~ "Irene Guerrero",
     player == "Montse Saldivar" ~ "Montse Saldívar",
     player == "Kimberly Rodriguez" ~ "Kimberly Rodríguez",
@@ -259,13 +257,14 @@ micros_shiny_comb_fem <- micros_shiny_comb_fem |>
   ))
 
 selected_players <- c(
-  "Itzel Velasco", "Sandra Paños", "Nicolette Hernández", "Annie Karich", "Irene Guerrero",
+  "Itzel Velasco", "Sandra Paños", "Irene Guerrero", "Xcaret Pineda", 
   "Montse Saldívar", "Kimberly Rodríguez", "Julie Prueba", "Scarlett Camberos",
   "Alexa Soto Ramírez", "Kiana Palacios", "Sofía Ramos", "Nancy Antonio", "Karina Rodríguez", 
-  "Ana Paula Pedrero", "Aranza Segura", "Bárbara Del Real Gómez", "Bruna Vilamala",
-  "Camila Lara", "Chidinma Okeke", "Jacqueline Tapia", "Jordan Brewster",
+  "Ana Paula Pedrero", "Aranza Segura", "Bárbara Del Real Gómez", 
+  "Camila Lara", "Chidinma Okeke", "Jacqueline Tapia",
   "Jana Gutiérrez", "Valentina Murrieta", "Vanessa Paredes", "Karen Luna", "Sarah Luebbert", 
-  "Aylin Aviléz", "Daniela Espinosa", "Alondra Cabanillas"
+  "Aylin Aviléz", "Daniela Espinosa", "Alondra Cabanillas", "Isa Haas"
+  # "Bruna Vilamala",
 )
 
 micros_individual <- micros_shiny_comb_fem |>

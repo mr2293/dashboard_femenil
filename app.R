@@ -14,21 +14,29 @@ library(rsconnect)
 source("dashboard_femenil.R")  # Ensure this file returns all needed plot functions and data
 
 player_info <- tibble::tibble(
-  player = c("Itzel Velasco", "Sandra Paños", "Nicolette Hernández", "Annie Karich", "Irene Guerrero",
+  player = c("Itzel Velasco", "Sandra Paños", "Irene Guerrero",
              "Montse Saldívar", "Kimberly Rodríguez", "Scarlett Camberos", "Alexa Soto Ramírez", 
              "Kiana Palacios", "Sofía Ramos", "Nancy Antonio", "Karina Rodríguez", 
-             "Bárbara Del Real Gómez", "Bruna Vilamala", "Chidinma Okeke", "Jordan Brewster", 
+             "Bárbara Del Real Gómez", "Chidinma Okeke", 
              "Jana Gutiérrez", "Vanessa Paredes", "Karen Luna", "Sarah Luebbert", "Aylin Aviléz", 
-             "Daniela Espinosa", "Alondra Cabanillas"),
-  image = c("itzel.jpg", "paños.jpg", "nicolette.jpg", "karich.jpg", "irene.jpg", 
+             "Daniela Espinosa", "Alondra Cabanillas", "Isa Haas", "Xcaret Pineda"
+             # "Bruna Vilamala",
+             ),
+  image = c("itzel.jpg", "paños.jpg", "irene.jpg", 
                     "montse.jpg", "kimberly.jpg", "scarlett.jpg", "alexa_soto.jpg", "kiana.jpg", 
                     "ramos.jpg", "nancy.jpg", "karina.jpg", "barbara.jpg", 
-                    "bruna.jpg", "okeke.jpg", "jordan.webp", "jana.jpg", "vanessa.webp", 
-                    "luna.jpg", "sarah.jpg", "aylin.jpg", "dani.jpg", "alondra.jpg"),
-  age = c(20, 32, 26, 21, 28, 18, 26, 24, 18, 28, 20, 29, 26, 16, 23, 24, 00, 21, 16, 27, 27, 22, 26, 19),
-  height = c("1.72m", "1.69m", "1.72m", "1.75m", "1.68m", "1.69m", "1.69m", "1.73m", "1.60m", "1.67m",
-             "1.64m", "1.71m", "1,72m", "1.72m", "1.63m", "1.75", "1.78m", "1.72m", "1.55m", "1.69m", 
-             "1.72m", "1.54m", "1.72m", "1.56m")
+                     "okeke.jpg", "jana.jpg", "vanessa.webp", 
+                    "luna.jpg", "sarah.jpg", "aylin.jpg", "dani.jpg", "alondra.jpg", "haas.jpg", "xcaret.webp"
+            # "bruna.jpg",
+            ),
+  age = c(20, 32, 28, 18, 26, 24, 18, 28, 20, 29, 26, 16, 24, 21, 16, 27, 27, 22, 26, 19, 24, 21
+          # 23
+          ),
+  height = c("1.72m", "1.69m", "1.68m", "1.69m", "1.69m", "1.73m", "1.60m", "1.67m",
+             "1.64m", "1.71m", "1,72m", "1.72m", "1.75", "1.72m", "1.55m", "1.69m", 
+             "1.72m", "1.54m", "1.72m", "1.56m", "1.77m", "1.75m"
+             # "1.63m",
+             )
 )
 
 ui <- fluidPage(
