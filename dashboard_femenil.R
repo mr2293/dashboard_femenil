@@ -650,7 +650,7 @@ rpe_df <- rpe_raw |>
   # Ajusta aquí si tus encabezados tienen pequeñas variaciones
   rename(
     fecha_rpe = `Marca temporal`,
-    player = `Nombre estandarizado`,
+    player = `Nombre del Jugador`,
     rpe_val = `RPE de la sesión`
   ) |>
   mutate(
