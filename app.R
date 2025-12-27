@@ -19,22 +19,23 @@ player_info <- tibble::tibble(
              "Kiana Palacios", "Sofía Ramos", "Nancy Antonio", "Karina Rodríguez", 
              "Bárbara Del Real Gómez", "Chidinma Okeke", 
              "Jana Gutiérrez", "Vanessa Paredes", "Karen Luna", "Sarah Luebbert", "Aylin Aviléz", 
-             "Daniela Espinosa", "Alondra Cabanillas", "Isa Haas", "Xcaret Pineda"
+             "Daniela Espinosa", "Alondra Cabanillas", "Isa Haas", "Xcaret Pineda", "Carol Acuña"
              # "Bruna Vilamala",
              ),
   image = c("itzel.jpg", "paños.jpg", "irene.jpg", 
                     "montse.jpg", "kimberly.jpg", "scarlett.jpg", "alexa_soto.jpg", "kiana.jpg", 
                     "ramos.jpg", "nancy.jpg", "karina.jpg", "barbara.jpg", 
                      "okeke.jpg", "jana.jpg", "vanessa.webp", 
-                    "luna.jpg", "sarah.jpg", "aylin.jpg", "dani.jpg", "alondra.jpg", "haas.jpg", "xcaret.webp"
+                    "luna.jpg", "sarah.jpg", "aylin.jpg", "dani.jpg", "alondra.jpg", "haas.jpg", "xcaret.webp",
+                    "carol.jpeg"
             # "bruna.jpg",
             ),
-  age = c(20, 32, 28, 18, 26, 24, 18, 28, 20, 29, 26, 16, 24, 21, 16, 27, 27, 22, 26, 19, 24, 21
+  age = c(20, 32, 28, 18, 26, 24, 18, 28, 20, 29, 26, 16, 24, 21, 16, 27, 27, 22, 26, 19, 24, 21, 18
           # 23
           ),
   height = c("1.72m", "1.69m", "1.68m", "1.69m", "1.69m", "1.73m", "1.60m", "1.67m",
              "1.64m", "1.71m", "1,72m", "1.72m", "1.75", "1.72m", "1.55m", "1.69m", 
-             "1.72m", "1.54m", "1.72m", "1.56m", "1.77m", "1.75m"
+             "1.72m", "1.54m", "1.72m", "1.56m", "1.77m", "1.75m", "1.53m"
              # "1.63m",
              )
 )
