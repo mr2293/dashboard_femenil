@@ -255,6 +255,7 @@ micros_shiny_comb_fem <- micros_shiny_comb_fem |>
     player == "Chidimna Okeke" ~ "Chidinma Okeke",
     player == "Aylin Avilez" ~ "Aylin Aviléz",
     player == "Carol Acuña" ~ "Carol Acuña",
+    player == "Julie Lopez" ~ "Julie Lopez",
     TRUE ~ player
   ))
 
@@ -265,7 +266,7 @@ selected_players <- c(
   "Ana Paula Pedrero", "Aranza Segura", "Bárbara Del Real Gómez", 
   "Camila Lara", "Chidinma Okeke", "Jacqueline Tapia",
   "Jana Gutiérrez", "Valentina Murrieta", "Vanessa Paredes", "Karen Luna", "Sarah Luebbert", 
-  "Aylin Aviléz", "Daniela Espinosa", "Alondra Cabanillas", "Isa Haas", "Carol Acuña"
+  "Aylin Aviléz", "Daniela Espinosa", "Alondra Cabanillas", "Isa Haas", "Carol Acuña", "Julie Lopez"
   # "Bruna Vilamala",
 )
 
