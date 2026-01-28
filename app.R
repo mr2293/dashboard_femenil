@@ -28,13 +28,16 @@ player_info <- tibble::tibble(
                     "montse.jpg", "kimberly.jpg", "scarlett.jpg", "alexa_soto.jpg", "kiana.jpg", 
                     "ramos.jpg", "nancy.jpg", "karina.jpg", "barbara.jpg", 
                      "okeke.jpg", "jana.jpg", "vanessa.webp", 
-                    "luna.jpg", "sarah.jpg", "aylin.jpg", "dani.jpg", "alondra.jpg", "haas.jpg", "xcaret.webp",
-                    "carol.jpeg", "julie.webp", "giana.webp", "garcia.png", "annia.jpeg", "geyse.jpg", "priscila.avif",
+                    "luna.jpg", "sarah.jpg", "aylin.jpg", "dani.jpg", "alondra.jpg", "haas.jpg", "xcaret.jpg",
+                    "carol.jpeg", "julie.jpg", "giana.jpg", "garcia.jpg", "annia.jpg", "geyse.jpg", "priscila.avif",
             "valentina.png"
             # "bruna.jpg",
             ),
-  age = c(20, 32, 28, 18, 26, 24, 18, 28, 20, 29, 26, 16, 24, 21, 16, 27, 27, 22, 26, 19, 24, 21, 18, 20, 21, 28, 29, 28, 21, 17
-          # 23
+  age = c("23/09/2004", "04/11/1992", "12/12/1996", "20/09/2006", "26/03/1999", "20/11/2000", "20/03/2007", "01/10/1996", 
+          "20/07/2005", "02/04/1996", "02/03/1999", "05/09/2008", "11/08/2000", "25/10/2003", "02/07/2009", "12/02/1998", 
+          "16/12/1997", "18/05/2003", "13/07/1999", "21/10/2005", "20/01/2001", "30/01/2004", "28/11/2007", "24/02/2005", 
+          "13/04/2004", "02/04/1997", "12/03/1996", "27/03/1998", "22/08/2004", "22/10/2008"
+          # "04/06/2002
           ),
   height = c("1.72m", "1.69m", "1.68m", "1.69m", "1.69m", "1.73m", "1.60m", "1.67m",
              "1.64m", "1.71m", "1,72m", "1.72m", "1.75", "1.72m", "1.55m", "1.69m", 
@@ -396,7 +399,7 @@ server <- function(input, output, session) {
       tags$img(src = file.path("player_images", player_row$image),
                width = "100%", style = "max-width:200px; border-radius:10px; margin-bottom:10px;"),
       tags$h4(player_row$player),
-      tags$p(paste("Edad:", player_row$age)),
+      tags$p(paste("Nacida el:", player_row$age)),
       tags$p(paste("Estatura:", player_row$height))
     )
   })
