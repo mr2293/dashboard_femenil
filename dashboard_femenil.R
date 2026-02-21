@@ -124,7 +124,7 @@ recuperacion_df <- recuperacion_df|>
     `Nivel de Cansancio hoy (Fatiga)`,
     `Qué tal descansaste ayer?`,
     `Cuántas horas dormiste ayer?`,
-    `Estás adolorido de alguna parte?`,
+    `¿Estás adolorida de alguna parte? Indica un valor númerico (1= muy muy poco dolor, 5= muy muy adolorida).`,
     `Donde te encuentras adolorido? Indica cada zona de dolor`
   ))
 
@@ -147,7 +147,7 @@ recuperacion_df <- recuperacion_df |>
   mutate(
     fatiga_score = niveles_fatiga[`Nivel de Cansancio hoy (Fatiga)`],
     sueño_score = niveles_sueño[`Qué tal descansaste ayer?`],
-    dolor_score = niveles_dolor[`Estás adolorido de alguna parte?`]
+    dolor_score = niveles_dolor[`¿Estás adolorida de alguna parte? Indica un valor númerico (1= muy muy poco dolor, 5= muy muy adolorida).`]
   )
 
 # Function to plot by player
@@ -163,7 +163,7 @@ plot_player_recuperacion <- function(player_name) {
     select(`Marca temporal`, Nombre,
            `Nivel de Cansancio hoy (Fatiga)`, 
            `Qué tal descansaste ayer?`,
-           `Estás adolorido de alguna parte?`,
+           `¿Estás adolorida de alguna parte? Indica un valor númerico (1= muy muy poco dolor, 5= muy muy adolorida).`,
            `Donde te encuentras adolorido? Indica cada zona de dolor`,
            fatiga_score, sueño_score, dolor_score) |> 
     rename(`Zona Adolorida` = `Donde te encuentras adolorido? Indica cada zona de dolor`) |>
@@ -180,7 +180,7 @@ plot_player_recuperacion <- function(player_name) {
       respuesta = case_when(
         score_type == "fatiga_score" ~ `Nivel de Cansancio hoy (Fatiga)`,
         score_type == "sueño_score" ~ `Qué tal descansaste ayer?`,
-        score_type == "dolor_score" ~ `Estás adolorido de alguna parte?`
+        score_type == "dolor_score" ~ `¿Estás adolorida de alguna parte? Indica un valor númerico (1= muy muy poco dolor, 5= muy muy adolorida).`
       ),
       color = case_when(
         type == "Dolor Muscular" & score >= 7 ~ "Alta",
@@ -804,7 +804,7 @@ recuperacion_df <- recuperacion_df |>
       `Cuántas horas dormiste ayer?`
     ),
     pain_score = compute_pain_score(
-      `Estás adolorido de alguna parte?`
+      `¿Estás adolorida de alguna parte? Indica un valor númerico (1= muy muy poco dolor, 5= muy muy adolorida).`
     )
   )
 
