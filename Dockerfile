@@ -51,7 +51,6 @@ COPY app.R dashboard_femenil.R deploy.R ./
 COPY data data
 COPY micros micros
 COPY www www
-COPY rsconnect rsconnect
 
 # -----------------------------
 # 5. Install renv and restore project library
