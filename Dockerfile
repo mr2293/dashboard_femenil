@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     libssl-dev \
     libgit2-dev \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # -----------------------------
@@ -56,7 +57,7 @@ COPY www www
 # 5. Install renv and restore project library
 # -----------------------------
 RUN R -e "install.packages('renv', repos='https://cloud.r-project.org')" && \
-    R -e "options(renv.verbose=TRUE, renv.config.install.jobs=1, renv.config.repos.override='https://packagemanager.posit.co/cran/__linux__/jammy/latest'); renv::restore(prompt=FALSE)"
+    R -e "options(renv.verbose=TRUE, renv.config.install.jobs=1, renv.config.repos.override='https://packagemanager.posit.co/cran/__linux__/noble/latest'); renv::restore(prompt=FALSE)"
 
 # -----------------------------
 # 6. Expose Shiny port
