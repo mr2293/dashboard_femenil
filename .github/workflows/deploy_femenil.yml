@@ -54,12 +54,12 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "chore: update femenil data sheet [skip ci]"
-            git push --force origin main
+            git push origin main
           fi
 
       # 6) Build Docker image
       - name: Build Docker image
-        run: docker build --pull -t dashboard_femenil .
+        run: docker build --pull --no-cache -t dashboard_femenil .
 
       # 7) Deploy Shiny app inside Docker
       - name: Deploy to shinyapps.io
