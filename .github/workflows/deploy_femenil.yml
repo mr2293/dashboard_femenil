@@ -2,7 +2,7 @@ name: Update Google Sheet & Deploy Femenil Shiny App
 
 on:
   schedule:
-    # Run daily at 10:30 AM Mexico City time
+    # Run daily at 10:30 PM Mexico City time (UTC-6) = 04:30 UTC
     - cron: '30 16 * * *'
   workflow_dispatch:
 
@@ -21,6 +21,14 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
+      # 1.5) Sync to origin/main (avoid local-change pull conflicts)
+      - name: Sync to origin/main
+        run: |
+          set -e
+          git fetch origin main
+          git checkout -B main origin/main
+          git reset --hard origin/main
+
       # 2) Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -36,25 +44,35 @@ jobs:
       - name: Ensure data folder exists
         run: mkdir -p data
 
-      # 4) Download Google Sheet
-      - name: Download Google Sheet
+      # 4) Download Cuestionario Femenil Google Sheet
+      - name: Download Cuestionario Google Sheet
         env:
           SHEET_ID_FEM: ${{ secrets.SHEET_ID_FEM }}
         run: python download_gsheet.py
 
-      # 5) Commit & push updated sheet (if changed)
-      - name: Commit and push updated sheet
+      # 4.5) Download RPE Femenil Google Sheet
+      - name: Download RPE Google Sheet
+        env:
+          RPE_SHEET_ID_FEM: ${{ secrets.RPE_SHEET_ID_FEM }}
+        run: python download_rpe_femenil.py
+
+      # 5) Commit & push updated sheets (if changed)
+      - name: Commit and push updated sheets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase --autostash origin main
-          git add data/cuestionario_femenil.xlsx
+
+          git add -f \
+            data/cuestionario_femenil.xlsx \
+            data/rpe_femenil.xlsx
+
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore: update femenil data sheet [skip ci]"
+            git commit -m "chore: update femenil data sheets [skip ci]"
             git push origin main
           fi
 
