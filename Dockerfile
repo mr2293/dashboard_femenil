@@ -56,7 +56,7 @@ COPY www www
 # 5. Install renv and restore project library
 # -----------------------------
 RUN R -e "install.packages('renv', repos='https://cloud.r-project.org')" && \
-    R -e "options(renv.verbose=TRUE); renv::restore(prompt=FALSE)"
+    R -e "options(renv.verbose=TRUE, renv.config.install.parallel=FALSE); renv::restore(prompt=FALSE)"
 
 # -----------------------------
 # 6. Expose Shiny port
