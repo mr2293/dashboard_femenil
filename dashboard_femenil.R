@@ -7,6 +7,7 @@ library(lubridate)
 library(readxl)
 library(dplyr)
 library(zoo)
+library(ggplot2)
 
 # Leer Cuestionario de Bienestar de Jugadoras ---------
 survey_path <- "data/cuestionario_femenil.xlsx"
