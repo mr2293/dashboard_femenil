@@ -259,46 +259,56 @@ plot_player_recuperacion <- function(player_name) {
 
 micros_shiny_comb_fem <- read_csv("micros/micros_shiny_comb_fem.csv")
 
+nombres <- micros_shiny_comb_fem |>
+  distinct(player, .keep_all = TRUE)
+
 micros_shiny_comb_fem <- micros_shiny_comb_fem |>
   mutate(player = case_when(
     player == "Itzel Velasco"                  ~ "Itzel Velasco",
     player == "Sandra Paños"                   ~ "Sandra Paños",
-    player == "Irene Guerrero"                 ~ "Irene Guerrero",
-    player == "Montse Saldivar"                ~ "Montse Saldívar",
-    player == "Kimberly Rodriguez"             ~ "Kimberly Rodríguez",
-    player == "Julie Prueba"                   ~ "Julie Prueba",
-    player == "Scarlett Camberos"              ~ "Scarlett Camberos",
-    player == "Alexa Soto Ramirez"             ~ "Alexa Soto Ramírez",
+    player == "Irene Guerrero Sanmartin"       ~ "Irene Guerrero",
+    player == "Montserrat Saldivar Pavón"      ~ "Montse Saldívar",
+    player == "Kimberly Rodríguez Cubero"      ~ "Kimberly Rodríguez",
+    # player == "Julie Prueba"                   ~ "Julie Prueba",
+    player == "Scarlett Camberos Becerra"      ~ "Scarlett Camberos",
+    player == "Alexa Soto Ramírez"             ~ "Alexa Soto Ramírez",
     player == "Kiana Palacios"                 ~ "Kiana Palacios",
-    player == "Sofia  Ramos"                   ~ "Sofía Ramos",
-    player == "Nancy Antonio"                  ~ "Nancy Antonio",
-    player == "Karina Rodriguez"               ~ "Karina Rodríguez",
+    player == "Sofia Ramos Alva"               ~ "Sofía Ramos",
+    player == "Nancy Antonio López"            ~ "Nancy Antonio",
+    player == "Karina Rodríguez"               ~ "Karina Rodríguez",
     player == "Barbara Del Real Gomez"         ~ "Bárbara Del Real Gómez",
     player == "Camila Jocelyn Lara Contreras"  ~ "Camila Lara",
     player == "Jacqueline Tapia Martínez"      ~ "Jacqueline Tapia",
-    player == "Jana  Gutierrez"                ~ "Jana Gutiérrez",
+    player == "Jana Gutiérrez Campos"          ~ "Jana Gutiérrez",
     player == "Vanessa Lyliana Paredes Vences" ~ "Vanessa Paredes",
     player == "Chidimna Okeke"                 ~ "Chidinma Okeke",
-    player == "Aylin Avilez"                   ~ "Aylin Aviléz",
+    player == "Aylin Aviléz Peña"              ~ "Aylin Aviléz",
     player == "Carol Acuña"                    ~ "Carol Acuña",
     player == "Julie Lopez"                    ~ "Julie López",
     player == "Giana Riley"                    ~ "Giana Riley",
     player == "Gabriela Garcia"                ~ "Gabriela García",
-    player == "Geyse Ferreira"                 ~ "Geyse Ferreira",
+    player == "Geyse Da Silva Ferreira"        ~ "Geyse Ferreira",
     player == "Annia Mejia"                    ~ "Annia Mejía",
-    player == "Priscila Flor da Silva"         ~ "Priscila Flor da Silva",
+    player == "Priscila Da silva"              ~ "Priscila Da Silva",
+    player == "Alondra Cabanillas Soto"        ~ "Alondra Cabanillas",
+    player == "Arantza Segura Alvarado"        ~ "Arantza Segura",
+    player == "Karen Luna De Los Santos"       ~ "Karen Luna",
+    player == "Karol Bernal Castañeda"         ~ "Karol Bernal",
+    player == "Sarah Luebbert"                 ~ "Sarah Luebbert",
+    player == "Isa Haas Gehlen"                ~ "Isa Haas",
+    player == "Xcaret Pineda Torres"           ~ "Xcaret Pineda",
     TRUE ~ player
   ))
 
 selected_players <- c(
   "Itzel Velasco", "Sandra Paños", "Irene Guerrero", "Xcaret Pineda",
-  "Montse Saldívar", "Kimberly Rodríguez", "Julie Prueba", "Scarlett Camberos",
+  "Montse Saldívar", "Kimberly Rodríguez", "Scarlett Camberos",
   "Alexa Soto Ramírez", "Kiana Palacios", "Sofía Ramos", "Nancy Antonio", "Karina Rodríguez",
-  "Ana Paula Pedrero", "Aranza Segura", "Bárbara Del Real Gómez",
-  "Camila Lara", "Chidinma Okeke", "Jacqueline Tapia",
+  "Ana Paula Pedrero", "Aranza Segura", "Bárbara Del Real Gómez", "Karol Bernal",
+  "Camila Lara", "Chidinma Okeke", "Jacqueline Tapia", "Xcaret Pineda",
   "Jana Gutiérrez", "Valentina Murrieta", "Vanessa Paredes", "Karen Luna", "Sarah Luebbert",
   "Aylin Aviléz", "Daniela Espinosa", "Alondra Cabanillas", "Isa Haas", "Carol Acuña", "Julie López",
-  "Giana Riley", "Gabriela García", "Geyse Ferreira", "Annia Mejía", "Priscila Flor da Silva"
+  "Giana Riley", "Gabriela García", "Geyse Ferreira", "Annia Mejía", "Priscila Da Silva"
 )
 
 micros_individual <- micros_shiny_comb_fem |>

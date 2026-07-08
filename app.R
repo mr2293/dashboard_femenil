@@ -15,34 +15,42 @@ source("dashboard_femenil.R")  # Ensure this file returns all needed plot functi
 
 player_info <- tibble::tibble(
   player = c("Itzel Velasco", "Sandra Paños", "Irene Guerrero",
-             "Montse Saldívar", "Kimberly Rodríguez", "Scarlett Camberos", "Alexa Soto Ramírez", 
-             "Kiana Palacios", "Sofía Ramos", "Nancy Antonio", "Karina Rodríguez", 
-             "Bárbara Del Real Gómez", "Chidinma Okeke", 
-             "Jana Gutiérrez", "Vanessa Paredes", "Karen Luna", "Sarah Luebbert", "Aylin Aviléz", 
+             "Montse Saldívar", "Kimberly Rodríguez", "Scarlett Camberos", "Alexa Soto Ramírez",
+             "Kiana Palacios", "Sofía Ramos", "Nancy Antonio", "Karina Rodríguez",
+             "Bárbara Del Real Gómez", "Chidinma Okeke",
+             "Jana Gutiérrez", "Vanessa Paredes", "Karen Luna", "Sarah Luebbert", "Aylin Aviléz",
              "Daniela Espinosa", "Alondra Cabanillas", "Isa Haas", "Xcaret Pineda", "Carol Acuña",
-             "Julie López", "Giana Riley", "Gabriela García", "Annia Mejía", "Geyse Ferreira", 
-             "Priscila Flor da Silva", "Valentina Murrieta"
+             "Julie López", "Giana Riley", "Gabriela García", "Annia Mejía", "Geyse Ferreira",
+             "Priscila Da Silva", "Valentina Murrieta",
+             "Ana Paula Pedrero", "Arantza Segura", "Karol Bernal" 
+             # "Camila Lara", "Jacqueline Tapia"
              # "Bruna Vilamala",
              ),
-  image = c("itzel.jpg", "paños.jpg", "irene.jpg", 
-                    "montse.jpg", "kimberly.jpg", "scarlett.jpg", "alexa_soto.jpg", "kiana.jpg", 
-                    "ramos.jpg", "nancy.jpg", "karina.jpg", "barbara.jpg", 
-                     "okeke.jpg", "jana.jpg", "vanessa.webp", 
+  image = c("itzel.jpg", "paños.jpg", "irene.jpg",
+                    "montse.jpg", "kimberly.jpg", "scarlett.jpg", "alexa_soto.jpg", "kiana.jpg",
+                    "ramos.jpg", "nancy.jpg", "karina.jpg", "barbara.jpg",
+                     "okeke.jpg", "jana.jpg", "vanessa.webp",
                     "luna.jpg", "sarah.jpg", "aylin.jpg", "dani.jpg", "alondra.jpg", "haas.jpg", "xcaret.jpg",
                     "carol.jpeg", "julie.jpg", "giana.jpg", "garcia.jpg", "annia.jpg", "geyse.jpg", "priscila.avif",
-            "valentina.png"
+            "valentina.png",
+            "pedrero.jpeg", "arantza.jpeg", "karol.jpeg"
+            # , "default.jpg", "default.jpg"
             # "bruna.jpg",
             ),
-  age = c("23/09/2004", "04/11/1992", "12/12/1996", "20/09/2006", "26/03/1999", "20/11/2000", "20/03/2007", "01/10/1996", 
-          "20/07/2005", "02/04/1996", "02/03/1999", "05/09/2008", "11/08/2000", "25/10/2003", "02/07/2009", "12/02/1998", 
-          "16/12/1997", "18/05/2003", "13/07/1999", "21/10/2005", "20/01/2001", "30/01/2004", "28/11/2007", "24/02/2005", 
-          "13/04/2004", "02/04/1997", "12/03/1996", "27/03/1998", "22/08/2004", "22/10/2008"
+  age = c("23/09/2004", "04/11/1992", "12/12/1996", "20/09/2006", "26/03/1999", "20/11/2000", "20/03/2007", "01/10/1996",
+          "20/07/2005", "02/04/1996", "02/03/1999", "05/09/2008", "11/08/2000", "25/10/2003", "02/07/2009", "12/02/1998",
+          "16/12/1997", "18/05/2003", "13/07/1999", "21/10/2005", "20/01/2001", "30/01/2004", "28/11/2007", "24/02/2005",
+          "13/04/2004", "02/04/1997", "12/03/1996", "27/03/1998", "22/08/2004", "22/10/2008",
+          "01/08/2008", "03/08/2007", "02/02/2003" 
+          # NA, NA
           # "04/06/2002
           ),
   height = c("1.72m", "1.69m", "1.68m", "1.69m", "1.69m", "1.73m", "1.60m", "1.67m",
-             "1.64m", "1.71m", "1,72m", "1.72m", "1.75", "1.72m", "1.55m", "1.69m", 
+             "1.64m", "1.71m", "1,72m", "1.72m", "1.75", "1.72m", "1.55m", "1.69m",
              "1.72m", "1.54m", "1.72m", "1.56m", "1.77m", "1.75m", "1.53m", "1.66m",
-             "1.75m", "1.85m", "1.74m", "1.68m", "1.70m", "1.60m"
+             "1.75m", "1.85m", "1.74m", "1.68m", "1.70m", "1.60m",
+             "1.69m", "1.69m", "1.67m"
+             # , NA, NA
              # "1.63m",
              )
 )
